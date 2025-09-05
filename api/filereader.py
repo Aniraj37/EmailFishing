@@ -3,7 +3,7 @@ from openpyxl import load_workbook
 
 
 EXTENTION_LIST = [
-    "text/plain",
+    "text/csv",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 ]
 
@@ -17,8 +17,9 @@ def read_setup_file(setup_file):
     if setup_file.content_type not in EXTENTION_LIST:
         return None
     
-    if setup_file.content_type =="text/plain":
-        return read_text_file(setup_file)
+    if setup_file.content_type == "text/csv":
+
+        return read_csv_file(setup_file)
     
     if setup_file.content_type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
         return read_excel_file(setup_file)
@@ -45,7 +46,6 @@ def read_csv_file(setup_file):
             })
 
     return suspicious_phrases
-
 
 def read_excel_file(setup_file):
     """
