@@ -3,7 +3,6 @@ from openpyxl import load_workbook
 
 
 EXTENTION_LIST = [
-    "text/csv",
     "text/plain",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 ]
@@ -17,10 +16,6 @@ def read_setup_file(setup_file):
     """
     if setup_file.content_type not in EXTENTION_LIST:
         return None
-    
-    if setup_file.content_type == "text/csv":
-
-        return read_csv_file(setup_file)
     
     if setup_file.content_type =="text/plain":
         return read_text_file(setup_file)
@@ -51,26 +46,6 @@ def read_csv_file(setup_file):
 
     return suspicious_phrases
 
-def read_text_file(setup_file):
-    """
-    - Reads text file and segrigates the text and appends to empty list in a dictionary format.
-    """
-
-    suspicious_phrases = []
-    
-    file_content = setup_file.read().decode("utf-8").strip().splitlines()
-    ss = file_content[0].strip().split(",")
-    for line in ss:
-        parts = line.strip().split(',')
-        if len(parts) >=3:
-            suspicious_phrases.append({
-                "start": parts[0].strip(),
-                "end": parts[1].strip(),
-                "phrases": [p.strip() for p in parts[2:]],
-                "segment_type": parts[3].strip().lower() if len(parts) >= 4 and parts[3].strip() else "html"
-            })
-
-    return suspicious_phrases
 
 def read_excel_file(setup_file):
     """

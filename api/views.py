@@ -11,7 +11,6 @@ class FileReader(GenericAPIView):
     def post(self,request,*args, **kwargs):
         setup_file = request.FILES.get('setup')
         email_file = request.FILES.get('email')
-        print(setup_file.content_type)
 
         if not setup_file or not email_file:
             print("Yes")
