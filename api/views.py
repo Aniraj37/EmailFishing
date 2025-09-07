@@ -31,7 +31,7 @@ class FileReader(GenericAPIView):
         email_result = read_email_file(email_file)
         if not email_result:
             return project_return(
-                message="File is Empty",
+                message="File is Empty / Wrong File Type",
                 status=status.HTTP_204_NO_CONTENT
             )
 

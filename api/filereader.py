@@ -41,7 +41,7 @@ def read_csv_file(setup_file):
             suspicious_phrases.append({
                 "start": col[0].strip(),
                 "end": col[1].strip(),
-                "phrases": [_.strip() for _ in re.split(r'[,,]', col[2]) if _.strip()],
+                "phrases": col[2].strip(),
                 "segment_type": col[3].strip().lower() if len(col) >= 4 and col[3].strip() else "html"
             })
 
@@ -60,7 +60,7 @@ def read_excel_file(setup_file):
             suspicious_phrases.append({
                     "start": col[0].strip(),
                     "end": col[1].strip() if col[1] else "",
-                    "phrases": [_.strip() for _ in re.split(r'[,,]', col[2]) if _.strip()],
+                    "phrases": col[2].strip(),
                     "segment_type": str(col[3]).strip().lower() if len(col) >= 4 and col[3] else "html" 
                 })
 
@@ -70,7 +70,9 @@ def read_excel_file(setup_file):
 def read_email_file(email_file):
     """
     - reads email file (.eml) into a list of lines with the line numbers.
-    """
+    # """
+    if not email_file.content_type == "message/rfc822":
+        return None
     file_content=email_file.read().decode("utf-8", errors="ignore")
     lines = file_content.splitlines()
     return list(enumerate(lines, start=1))
