@@ -34,6 +34,7 @@ local_settings.py
 *.csv
 *.xls
 *.xlsx
+*.eml
 
 # IDEs and editors
 .vscode/

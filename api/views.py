@@ -1,8 +1,9 @@
 from rest_framework.generics import GenericAPIView
 from .serializers import ReadFileSerializer
 from utils.utility import project_return
-from .filereader import read_setup_file, read_email_file
+from .filereader import read_setup_file, read_email_file, segment_extraction
 from rest_framework import status
+from .models import EmailScan, FailureEmail
 
 class FileReader(GenericAPIView):
     serializer_class = ReadFileSerializer
@@ -34,9 +35,20 @@ class FileReader(GenericAPIView):
                 message="File is Empty / Wrong File Type",
                 status=status.HTTP_204_NO_CONTENT
             )
+        
+        extracted_segments = segment_extraction(email_lines=email_result, rules=setup_result)
+
+        if not extracted_segments:
+            return project_return(
+                message="There is no suspicious phrase found",
+                data = extracted_segments,
+                status = status.HTTP_204_NO_CONTENT
+            )
+        
+        email = EmailScan.objects.create(setup_file=setup_file, email_file=email_file)
 
         return project_return(
             message="Successfully Read",
-            data = setup_result,
+            data = extracted_segments,
             status = status.HTTP_200_OK
         )
