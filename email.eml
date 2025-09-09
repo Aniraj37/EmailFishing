@@ -40,8 +40,7 @@ x-ms-traffictypediagnostic:
 x-microsoft-antispam:
 	BCL:0;ARA:13230040|366016|39142699007|31052699007|7053199007|8096899003|41050700001;
 x-ms-exchange-crosstenant-originalarrivaltime: 12 Jul 2025 19:17:55.6093 (UTC)
-x-ms-exchange-crosstenant-network-message-id:
-	b46d6561-9284-4d03-05f3-08ddc178ce3a
+x-ms-exchange-crosstenant-network-message-id: b46d6561-9284-4d03-05f3-08ddc178ce3a
 x-ms-exchange-crosstenant-id: 93b0ec50-fc3f-47ed-9345-9ffc6012541c
 x-ms-exchange-crosstenant-fromentityheader: Hosted
 x-ms-exchange-transport-crosstenantheadersstamped: MEUP300MB0123
@@ -79,13 +78,16 @@ Fred
 --_000_SY8P300MB02497FD0C1590FA7D203F61DAB4AASY8P300MB0249AUSP_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-
+password
 <html>
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
 1">
 <style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
 ttom:0;} </style>
+<header>
+confidential
+</header>
 </head>
 <body dir=3D"ltr">
 <div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
@@ -103,6 +105,7 @@ olor: rgb(0, 0, 0);">
 <p class=3D"elementToProof" style=3D"background-color: white;"><span style=
 =3D"font-family: Arial, sans-serif; color: rgb(31, 73, 125);">Regards</span=
 ></p>
+password does not work
 password
 print me
 </div>
