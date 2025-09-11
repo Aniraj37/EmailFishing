@@ -172,6 +172,17 @@ def segment_extraction(email_lines, rules):
             "matched_segments": occ,
             "total_count": total
         }
-
+    
+    if check_total_count(results) is None:
+        return None
     return results
+
+def check_total_count(result):
+    """
+    - checks if each total_count in the provided data is 0
+    """
+    if all(item.get("total_count", 0) == 0 for item in result.values()):
+        return None
+    
+    return result
 
