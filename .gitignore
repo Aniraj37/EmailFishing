@@ -30,7 +30,6 @@ local_settings.py
 */migrations/*.py
 
 # Text & Excel files
-*.txt
 *.csv
 *.xls
 *.xlsx

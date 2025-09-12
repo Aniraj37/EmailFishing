@@ -15,7 +15,6 @@ class FileReader(GenericAPIView):
         email_file = request.FILES.get('email')
 
         if not setup_file or not email_file:
-            print("Yes")
             return project_return(
                 message = "File not uploaded.",
                 status = status.HTTP_400_BAD_REQUEST
