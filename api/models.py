@@ -2,6 +2,9 @@ from django.db import models
 import uuid
 # Create your models here.
 class EmailScan(models.Model):
+    '''
+    - Stores failed emails and its setup files
+    '''
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, db_column="ID"
     )
@@ -13,6 +16,9 @@ class EmailScan(models.Model):
         return str(self.id)
     
 class FailureEmail(models.Model):
+    '''
+    - stores details of the flagged emails along with its id
+    '''
     email = models.ForeignKey(EmailScan, on_delete=models.CASCADE, related_name="failures")
     phrase = models.CharField(max_length=255)
     start_line = models.IntegerField(null=True, blank=True)
