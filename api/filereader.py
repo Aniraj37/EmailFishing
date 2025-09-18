@@ -1,12 +1,13 @@
 import csv, re
 from openpyxl import load_workbook
 
-
+# --- Constant values ---
 EXTENTION_LIST = [
     "text/csv",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 ]
 
+# --- Constant values ---
 FOUND = "Segment_found"
 
 
@@ -36,6 +37,7 @@ def read_csv_file(setup_file):
     decoded_file = setup_file.read().decode("utf-8").splitlines()
     file_content = csv.reader(decoded_file)
 
+    # --- Skips header ---
     next(file_content, None)
 
     for col in file_content:
@@ -53,11 +55,14 @@ def read_excel_file(setup_file):
     """
     - Reads excel file and segrigates the text and appends to empty list in a dictionary format.
     """
+
+    # --- initialize pre_defined_rules list ---
     pre_defined_rules = []
+    # --- Open excel files ---
     work_book = load_workbook(setup_file, data_only=True)
     file_content = work_book.active
 
-    for col in file_content.iter_rows(min_row = 2,values_only=True):
+    for col in file_content.iter_rows(min_row = 2,values_only=True): # --- Skips first row of the cell : Assumes it is a header ---
         if len(col) >= 3:    
             pre_defined_rules.append({
                     "start": col[0].strip(),
@@ -110,20 +115,22 @@ def segment_extraction(email_lines, rules):
       "phrase" : {  
         "segment_lines":[]
         "start_line": integer,
-        "occurrence": [{
-        }],
-        "total_count": integer
+        "status":"",
+        "matched_segments": [{}],
+        "total_count": integer 
       }
     """
 
-    results = {r["phrase"]: {
+    # --- create result dictionary ---
+    results = {rule["phrase"]: {
         "segment_lines": [],
         "start_line": None,
         "status": "segment_not_found",
-        "matched_segments": [],
-        "total_count": 0
-    } for r in rules}
-
+        "matched_segments": [],  # --- Highligh matched segments ---
+        "total_count": 0   # --- Stores number of times phase occured in the segment ---
+    } for rule in rules}
+    
+    # --- initialize active dictionary ---
     active = {}
 
     for line_no, text in email_lines:
@@ -134,12 +141,12 @@ def segment_extraction(email_lines, rules):
 
             # --- Single line segment ---
             if seg_type == "single" and start in text:
-                occ, total = find_occurrences([(line_no, text)], phrase)
+                occurance, total = find_occurrences([(line_no, text)], phrase)
                 results[phrase] = {
                     "segment_lines": [text],
                     "start_line": line_no,
                     "status": FOUND,
-                    "matched_segments": occ,
+                    "matched_segments": occurance,
                     "total_count": total
                 }
 
@@ -151,12 +158,12 @@ def segment_extraction(email_lines, rules):
                     active[phrase]["lines"].append((line_no, text))
                     if end and end in text:
                         lines = active[phrase]["lines"]
-                        occ, total = find_occurrences(lines, phrase)
+                        occurance, total = find_occurrences(lines, phrase)
                         results[phrase] = {
                             "segment_lines": [t for _, t in lines],
                             "start_line": active[phrase]["start_line"],
                             "status": FOUND,
-                            "matched_segments": occ,
+                            "matched_segments": occurance,
                             "total_count": total
                         }
                         del active[phrase]
@@ -164,12 +171,12 @@ def segment_extraction(email_lines, rules):
     # --- Any still-open multi-line segments ---
     for phrase, state in active.items():
         lines = state["lines"]
-        occ, total = find_occurrences(lines, phrase)
+        occurance, total = find_occurrences(lines, phrase)
         results[phrase] = {
             "segment_lines": [t for _, t in lines],
             "start_line": state["start_line"],
             "status": FOUND,
-            "matched_segments": occ,
+            "matched_segments": occurance,
             "total_count": total
         }
     
