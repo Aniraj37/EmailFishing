@@ -87,7 +87,7 @@ class FileReaderView(GenericAPIView):
 
         # --- Display results ---
         return project_return(
-            message="Successfully Fetched",
+            message="Data fetched successfully.",
             data = self.get_paginated_response(email_obj.data),
             status=status.HTTP_200_OK
         )
