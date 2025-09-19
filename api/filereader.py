@@ -67,7 +67,7 @@ def read_excel_file(setup_file):
             pre_defined_rules.append({
                     "start": col[0].strip(),
                     "end": col[1].strip() if col[1] else "",
-                    "phrase": col[2].strip(),
+                    "phrase": col[2].strip() if col[2] else "",
                     "segment_type": str(col[3]).strip().lower() if len(col) >= 4 and col[3] else "html" 
                 })
 
