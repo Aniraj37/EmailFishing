@@ -86,7 +86,7 @@ password
 <style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
 ttom:0;} </style>
 <header>
-confidential
+This is a spam email
 </header>
 </head>
 <body dir=3D"ltr">
@@ -99,15 +99,14 @@ Lets see what this looks like with special words</div>
 nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
 olor: rgb(0, 0, 0);">
 <br>
+click this link: to continue
 </div>
 <p class=3D"elementToProof" style=3D"background-color: white;"><span style=
-=3D"color: rgb(32, 31, 30);">&nbsp;</span></p>
+=3D"color: rgb(32, 31, 30);">&nbsp;</span> password </p>
 <p class=3D"elementToProof" style=3D"background-color: white;"><span style=
 =3D"font-family: Arial, sans-serif; color: rgb(31, 73, 125);">Regards</span=
 ></p>
-password does not work
-password something else
-print me
+Use your password to login.
 </div>
 </body>
 </html>

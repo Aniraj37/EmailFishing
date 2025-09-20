@@ -1,0 +1,7 @@
+Segment Start,Segment End,Phrase,Segment Type
+<body,</body>,password,html
+x-ms-exchange-crosstenant-id:,,93b0ec50-fc3f-47ed-9345-9ffc6012541c,single
+x-ms-exchange-crosstenant-mailboxtypE,,HOSTED,single
+<header,</header>,spam,multi
+X-MS-Exchange-Organization-AuthAs:,,External,single
+x-ms-exchange-crosstenant-network-message-id,,b46d6561-9284-4d03-05f3-08ddc178ce3a,single

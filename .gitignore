@@ -30,9 +30,9 @@ local_settings.py
 */migrations/*.py
 
 # Text & Excel files
-*.csv
+# *.csv
 *.xls
-*.xlsx
+# *.xlsx
 *.eml
 
 # IDEs and editors
